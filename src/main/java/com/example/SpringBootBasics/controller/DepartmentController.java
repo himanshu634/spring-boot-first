@@ -6,12 +6,14 @@ import com.example.SpringBootBasics.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Component
 public class DepartmentController {
 
     @Autowired
@@ -39,7 +41,7 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteDepartment(@PathVariable("id") Long departmentId) {
+    public String deleteDepartment(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
         LOGGER.info("Inside delete department in logger.");
         departmentService.deleteDepartment(departmentId);
         return "Department " + departmentId + " deleted successfully.";

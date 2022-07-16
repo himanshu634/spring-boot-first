@@ -16,9 +16,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(DepartmentNotFoundException.class)
     public ResponseEntity<ErrorMessage> departmentNotFoundException(DepartmentNotFoundException exception,
                                                                     WebRequest request){
+        ErrorMessage message = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(new ErrorMessage(HttpStatus.NOT_FOUND,
-                exception.getMessage()));
+                .body(message);
     }
 }
